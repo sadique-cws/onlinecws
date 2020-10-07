@@ -10,7 +10,8 @@ class Order extends Model
     protected $fillable = ['user_id'];
     use HasFactory;
 
-    public function orderitem(){
-        return $this->hasMany("App\Models\OrderItem");
+    public function orderItem()
+    {
+        return $this->hasMany('App\Models\OrderItem', 'order_id', 'id');
     }
 }

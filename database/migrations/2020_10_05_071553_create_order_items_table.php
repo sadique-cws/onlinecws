@@ -18,6 +18,8 @@ class CreateOrderItemsTable extends Migration
             
             $table->unsignedBigInteger("user_id");
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger("order_id");
+            $table->foreign('order_id')->references('id')->on('orders');
             $table->boolean("ordered")->default(false);
             $table->integer("course_id")->unsigned();
             $table->timestamps();

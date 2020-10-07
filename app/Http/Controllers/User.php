@@ -8,7 +8,8 @@ use App\Models\Order;
 
 use Auth;
 use Illuminate\Http\Request;
-class User extends Controller{
+class User extends Controller
+{
     public function index(){
         $data = ["course"=>Course::all()];
         return view("home.homepage",$data);
@@ -39,14 +40,16 @@ class User extends Controller{
             $oi = OrderItem::create([
                 'user_id' => $user_id,
                 'course_id' => $course->id,
-                'ordered' =>false
+                'ordered' =>false,
+                'order_id' => $o->id
             ]);
     }
     else{
         $oi = OrderItem::create([
             'course_id' => $course->id,
             'user_id' => $user_id,
-            'ordered' =>false
+            'ordered' =>false,
+            'order_id' => $order->id
         ]);
     }
         $req->session()->flash('msg', "this course Added in your cart");
@@ -56,7 +59,8 @@ class User extends Controller{
     public function cart(Request $req){
         $user_id = Auth::id();
 
-        return $order = Order::find(1)->orderitem;
+        $order = Order::find(1)->orderItem;
+        return view("home/cart",["order"=>$order]);
     }
 
 
