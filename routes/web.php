@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\User::class,"index"])->name("homepage");
 Route::get('/c/{id}', [App\Http\Controllers\User::class,"course"])->name("singleCourse");
 Route::get('/cart', [App\Http\Controllers\User::class,"cart"])->name("cart")->middleware("auth");
+Route::post('/add-coupon', [App\Http\Controllers\User::class,"addCoupon"])->name("addCoupon")->middleware("auth");
 Route::get('/add-to-cart/{c_id}', [App\Http\Controllers\User::class,"addToCart"])->name("addCart")->middleware("auth");
+Route::get('/remove-from-cart/{c_id}', [App\Http\Controllers\User::class,"removeFromCart"])->name("removeCart")->middleware("auth");
 
 Auth::routes();
 

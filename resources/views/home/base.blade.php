@@ -12,6 +12,15 @@
   </head>
   <body>
 
+    <ul>
+      @if (session("msg"))
+        <li>
+            {{session("msg")}}
+          </li>
+      @endif
+      
+    </ul>
+
     @section('content')
         @show
 
