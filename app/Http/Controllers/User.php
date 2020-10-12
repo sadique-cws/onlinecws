@@ -79,9 +79,16 @@ class User extends Controller
         $user_id = Auth::id();
 
         $order = Order::where(array(["ordered",false],["user_id",$user_id]))->first();
-        $order = Order::find($order->id)->orderitem;
         $couponStatus = false;
         
+        if($order==null){
+            
+            $req->session()->flash('msg', "cart is empty");
+            return redirect("/");
+
+        }
+        else{
+            $order = Order::find($order->id)->orderitem;
         
         return view("home/cart",[
             "order"=>$order,
@@ -89,6 +96,7 @@ class User extends Controller
             "getDiscountTotal"=>$this->get_discount_amount(),
             "couponStatus" => $couponStatus
             ]);
+        }
     }
 
     public function removeFromCart(Request $req,$c_id){
@@ -151,6 +159,22 @@ class User extends Controller
         
     }
 
+    public  function checkout(Request $req){
+        $user_id = Auth::id();
+        $order = Order::where(array(array("user_id",$user_id),array("ordered",FALSE)))->first();
+        $orderItem = Order::find($order->id)->orderItem;
+
+        $order->ordered = True;
+        $orderItem->map(function ($oi){
+            $oi->ordered = True;
+            $oi->save();
+        });
+        $order->save();
+
+        return redirect("/");
+    
+
+    }
 
 
     

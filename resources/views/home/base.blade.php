@@ -12,11 +12,26 @@
   </head>
   <body>
 
-    <ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+      <a href="" class="navbar-brand">Online CWS</a>
+
+      <form action="" class="form-inline mx-auto">
+          <input type="text" class="form-control" size="70" placeholder="search course">
+          <input type="submit" class="btn btn-danger">
+      </form>
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a href="" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="" class="nav-link">Cart</a></li>
+      </ul>
+    </nav>
+
+    
       @if (session("msg"))
-        <li>
+        <div class="alert alert-success">
             {{session("msg")}}
-          </li>
+        </div>
       @endif
       
     </ul>

@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Course;
 class OrderItem extends Model
-{
-    protected $fillable = ['user_id','order_id','course_id'];
+{   
+    protected $fillable = ['user_id','order_id','course_id','ordered'];
 
     use HasFactory;
 
