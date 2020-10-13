@@ -13,10 +13,10 @@
         <div class="row">
             <div class="col-lg-9">
 
-    @if (count($order) > 0)
+    @if (count($orderitem) > 0)
         
     <ul class="list-unstyled">
-        @foreach ($order as $o)
+        @foreach ($orderitem as $o)
         <?php $id = $o->courses[0]->id;?>
 
         <li class="media mb-3">
@@ -34,19 +34,34 @@
     <div class="list-group">
         <div class="list-group-item">Total Amount: <span class="text-dark float-right">{{ $getTotal }}</span></div>
         <div class="list-group-item">Total Saving: <span class="text-dark float-right">{{  $getTotal - $getDiscountTotal }}</span></div>
+        @if ($order->coupon!=NULL)
+            <div class="list-group-item bg-success text-white">
+                <div class="small"><u>Coupon applied</u></div>
+                Total Coupon Discount: 
+                <span class="text-white float-right">100</span>
+                
+            <div class="lead">
+            <span class="badge badge-dark badge-pill">START10 <a href="{{ route("removeCoupon")}}" class="text-white">&times;</a></span>
+            </div>  
+            </div>
+        @endif
         <div class="list-group-item">Total Payable: <span class="text-dark float-right">{{ $getDiscountTotal }}</span></div>
     </div>
     <!-- coupon work-->
-    @if ($order[0]->coupon==NULL)
+    @if ($order->coupon==NULL)
+    <form action="{{ route('addCoupon')}}" method="POST" class="mt-2 d-flex">
+        @csrf
+        <input type="text" name="code" class="form-control">
+        <input type="submit" name="send" class="btn btn-danger">
+    </form>
+    @endif
+    <br>
+    <div class="row no-gutters">
+        <div class="col mr-1"><a href="" class="btn btn-success btn-block">Go Back</a></div>
+        <div class="col"><a href="{{ route("checkout")}}" class="btn btn-warning btn-block">Checkout</a></div>
+    </div>
+
     
-<form action="{{ route('addCoupon')}}" method="POST" class="mt-2 d-flex">
-    @csrf
-    <input type="text" name="code" class="form-control">
-    <input type="submit" name="send" class="btn btn-danger">
-</form>
-@endif
-<a href="{{ route("checkout")}}" class="btn btn-primary">Checkout</a>
-    <a href="" class="btn btn-primary">Go Back</a>
 </div>
 </div>
 </div>

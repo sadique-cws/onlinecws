@@ -21,17 +21,23 @@
       </form>
 
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a href="" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="" class="nav-link">About</a></li>
-        <li class="nav-item"><a href="" class="nav-link">Cart</a></li>
+      <li class="nav-item"><a href="{{ route("homepage")}}" class="nav-link">Home</a></li>
+      <li class="nav-item"><a href="" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="{{ route("cart")}}" class="nav-link">Cart</a></li>
       </ul>
     </nav>
 
     
       @if (session("msg"))
-        <div class="alert alert-success">
-            {{session("msg")}}
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="alert alert-success">
+                {{session("msg")}}
+            </div>
         </div>
+      </div>
+      </div>
       @endif
       
     </ul>

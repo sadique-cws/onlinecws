@@ -9,7 +9,7 @@
             <div class="col-lg-3">
                 <div class="card border-0 shadow-sm">
                     <a href="{{ route('singleCourse',['id'=>$c->id]) }}" class="stretched-link">
-                <img src="{{ asset('course/'.$c->image)}}" alt="" class="card-img-top border border-muted">
+                <img src="{{ asset('course/'.$c->image)}}" alt="" class="w-100 border border-muted" style="object-fit: contain;height:220px">
                     </a>
                     <div class="card-body p-1">
                         <h2 class="h6">{{$c->title}}</h2>

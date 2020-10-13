@@ -88,10 +88,12 @@ class User extends Controller
 
         }
         else{
+            $o = Order::find($order->id);
             $order = Order::find($order->id)->orderitem;
         
         return view("home/cart",[
-            "order"=>$order,
+            "orderitem"=>$order,
+            "order"=>$o,
             "getTotal"=>$this->get_total_amount(),
             "getDiscountTotal"=>$this->get_discount_amount(),
             "couponStatus" => $couponStatus
@@ -127,9 +129,6 @@ class User extends Controller
             $req->session()->flash('msg', "this course not found in db for delete");
         endif;
 
-
-        
-        $req->session()->flash('msg', "this course Added in your cart");
         return redirect("cart");
         
 
@@ -158,6 +157,21 @@ class User extends Controller
 
         
     }
+
+    
+    public function removeCoupon(Request $req){
+        $user_id = Auth::id();
+        $order = Order::where(array(array("user_id",$user_id),array("ordered",FALSE)))->first();
+        $order->coupon = NULL;
+
+        $order->save();
+        $req->session()->flash('msg', "Coupon removed successfully");
+
+
+    return redirect("cart");
+
+    
+}
 
     public  function checkout(Request $req){
         $user_id = Auth::id();
