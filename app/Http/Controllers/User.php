@@ -60,21 +60,43 @@ class User extends Controller
         foreach($order as $o){
             $total += $o->courses[0]->price;
         }
+
+        
         return $total;
     }
     
-    private function get_discount_amount(){
+    private function get_payable_amount(){
         $user_id = Auth::id();
         $order = Order::where(array(["ordered",false],["user_id",$user_id]))->first();
-
+        $singleOrder = Order::find($order->id);
         $order = Order::find($order->id)->orderitem;
         $total = 0;
 
         foreach($order as $o){
             $total += $o->courses[0]->discount_price;
         }
+        if($singleOrder->coupon != NULL){
+            $coupon =  Coupon::find($singleOrder->coupon);
+            $total -= $coupon->amount;
+        }
         return $total;
     }
+
+    private function get_discount_amount(){
+        $user_id = Auth::id();
+        $order = Order::where(array(["ordered",false],["user_id",$user_id]))->first();
+        $order = Order::find($order->id)->orderitem;
+        $total = 0;
+
+        foreach($order as $o){
+            $total += $o->courses[0]->discount_price;
+        }
+       
+        return $total;
+    }
+
+    
+
     public function cart(Request $req){
         $user_id = Auth::id();
 
@@ -96,6 +118,7 @@ class User extends Controller
             "order"=>$o,
             "getTotal"=>$this->get_total_amount(),
             "getDiscountTotal"=>$this->get_discount_amount(),
+            'getPayableAmount'=>$this->get_payable_amount(),
             "couponStatus" => $couponStatus
             ]);
         }

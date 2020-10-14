@@ -45,7 +45,7 @@
             </div>  
             </div>
         @endif
-        <div class="list-group-item">Total Payable: <span class="text-dark float-right">{{ $getDiscountTotal }}</span></div>
+        <div class="list-group-item">Total Payable: <span class="text-dark float-right">{{ $getPayableAmount }}</span></div>
     </div>
     <!-- coupon work-->
     @if ($order->coupon==NULL)
