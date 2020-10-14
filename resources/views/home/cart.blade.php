@@ -57,7 +57,7 @@
     @endif
     <br>
     <div class="row no-gutters">
-        <div class="col mr-1"><a href="" class="btn btn-success btn-block">Go Back</a></div>
+        <div class="col mr-1"><a href="" class="btn btn-succmkl;3   ess btn-block">Go Back</a></div>
         <div class="col"><a href="{{ route("checkout")}}" class="btn btn-warning btn-block">Checkout</a></div>
     </div>
 
